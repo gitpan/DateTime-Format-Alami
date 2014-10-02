@@ -1,0 +1,97 @@
+NAME
+    DateTime::Format::Alami - Parse human date/time expression (base class)
+
+VERSION
+    This document describes version 0.01 of DateTime::Format::Alami (from
+    Perl distribution DateTime-Format-Alami), released on 2014-10-02.
+
+SYNOPSIS
+    Use English:
+
+     use DateTime::Format::Alami::EN;
+     my $parser = DateTime::Format::Alami::EN->new();
+     my $dt;
+     $dt = $parser->parse_datetime("2 hours 13 minutes from now");
+     $dt = $parser->parse_datetime("yesterday");
+
+    use Indonesian:
+
+     use DateTime::Format::Alami::ID;
+     my $parser = DateTime::Format::Alami::ID->new();
+     my $dt;
+     $dt = $parser->parse_datetime("5 jam lagi");
+     $dt = $parser->parse_datetime("hari ini");
+
+DESCRIPTION
+    EARLY RELEASE: PROOF OF CONCEPT ONLY AND VERY VERY INCOMPLETE.
+
+    This class parses human/natural date/time string and returns DateTime
+    object. Currently it supports English and Indonesian. It is meant to be
+    simple to add support for other human languages.
+
+    It works by matching date string with a bunch of regex patterns
+    (assembled from "p_*" methods, e.g. "p_today", "p_dur_ago",
+    "p_dur_later", and so on). If a pattern is found, the corresponding
+    "a_*" method is called to compute the DateTime object (e.g. if "p_today"
+    pattern matches, "a_today" is called).
+
+    To actually use this class, you must use one of its subclasses for each
+    human language that you want to parse.
+
+    There are already some other DateTime human language parsers on CPAN and
+    elsewhere, see "SEE ALSO".
+
+ADDING A NEW HUMAN LANGUAGE
+    TBD
+
+METHODS
+  new => obj
+    Constructor. You actually must instantiate subclass instead.
+
+  parse_datetime($str) => obj
+    Parse date/time expression in $str and return DateTime object. Return
+    undef if expression cannot be parsed.
+
+SEE ALSO
+  Similar modules on CPAN
+    DateTime::Format::Natural. Translating to a language other than English
+    looks very complex. This is indicated by the lack of support for
+    non-English languages.
+
+  Other modules on CPAN
+    DateTime::Format::Human deals with formatting and not parsing.
+
+  Similar non-Perl libraries
+    Natt Java library, which the last time I tried sometimes gives weird
+    answer, e.g. "32 Oct" becomes 1 Oct in the far future.
+    http://natty.joestelmach.com/
+
+    Duckling Clojure library, which can parse date/time as well as numbers
+    with some other units like temperature.
+    https://github.com/wit-ai/duckling
+
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/DateTime-Format-Alami>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/perlancar/perl-DateTime-Format-Alami>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=DateTime-Format-Alami
+    >
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
+
+AUTHOR
+    perlancar <perlancar@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by perlancar@cpan.org.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
