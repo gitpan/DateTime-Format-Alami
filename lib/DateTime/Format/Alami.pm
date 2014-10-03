@@ -1,7 +1,7 @@
 package DateTime::Format::Alami;
 
 our $DATE = '2014-10-03'; # DATE
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 use 5.010001;
 use strict;
@@ -242,7 +242,7 @@ DateTime::Format::Alami - Parse human date/time expression (base class)
 
 =head1 VERSION
 
-This document describes version 0.02 of DateTime::Format::Alami (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
+This document describes version 0.03 of DateTime::Format::Alami (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
 
 =head1 SYNOPSIS
 

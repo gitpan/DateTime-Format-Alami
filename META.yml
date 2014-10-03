@@ -27,7 +27,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=DateTime-Format-Alami
   homepage: https://metacpan.org/release/DateTime-Format-Alami
   repository: git://github.com/perlancar/perl-DateTime-Format-Alami.git
-version: '0.02'
+version: '0.03'
 x_Dist_Zilla:
   perl:
     version: '5.018001'
@@ -250,7 +250,15 @@ x_Dist_Zilla:
       version: '0.03'
     -
       class: Dist::Zilla::Plugin::Precompute
+      name: DateTime::Format::Alami::EN::MAPS
+      version: '0.03'
+    -
+      class: Dist::Zilla::Plugin::Precompute
       name: DateTime::Format::Alami::ID::RE
+      version: '0.03'
+    -
+      class: Dist::Zilla::Plugin::Precompute
+      name: DateTime::Format::Alami::ID::MAPS
       version: '0.03'
     -
       class: Dist::Zilla::Plugin::Prereqs

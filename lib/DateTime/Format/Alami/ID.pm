@@ -1,7 +1,7 @@
 package DateTime::Format::Alami::ID;
 
 our $DATE = '2014-10-03'; # DATE
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 use 5.010001;
 use strict;
@@ -9,7 +9,7 @@ use warnings;
 use parent qw(DateTime::Format::Alami);
 
 our $RE = "(?P<p_dur_later>(?P<o_dur>(?:((?^x:(?:\n                  [+-]?\n                  (?:\n                      \\d{1,2}([.]\\d{3})*(?:[,]\\d*)? | # indo\n                      \\d{1,2}([,]\\d{3})*(?:[.]\\d*)? | # english\n                      [,.]\\d+ |\n                      \\d+\n                  )\n                  (?:[Ee][+-]?\\d+)?\n              )) ?(?:tahun|thn|th|bulan|bul|bln|bl|minggu|mgg|mg|hari|hr|h|jam|j|menit|mnt|detik|det|dtk|dt) ?)+)) (?:(?:(?:yang|yg) )?akan (?:datang|dtg)|yad|lagi|lg))|(?P<p_dur_ago>(?P<o_dur>(?:((?^x:(?:\n                  [+-]?\n                  (?:\n                      \\d{1,2}([.]\\d{3})*(?:[,]\\d*)? | # indo\n                      \\d{1,2}([,]\\d{3})*(?:[.]\\d*)? | # english\n                      [,.]\\d+ |\n                      \\d+\n                  )\n                  (?:[Ee][+-]?\\d+)?\n              )) ?(?:tahun|thn|th|bulan|bul|bln|bl|minggu|mgg|mg|hari|hr|h|jam|j|menit|mnt|detik|det|dtk|dt) ?)+)) (?:(?:(?:yang|yg) )?lalu|tadi|td|yll?))|(?P<p_date_wo_year>(?P<o_dayint>(?:[12][0-9]|3[01]|0?[1-9])) ?(?P<o_monthname>(?:januari|jan|februari|pebruari|feb|peb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agu|agt|september|sept|sep|oktober|okt|november|nopember|nov|nop|desember|des))|(?P<o_dayint>(?:[12][0-9]|3[01]|0?[1-9]))[ /-](?P<o_monthint>(?:0?[1-9]|1[012]))\\b)|(?P<p_now>(?:saat ini|sekarang|skrg?))|(?P<p_yesterday>(?:kemar[ei]n|kmrn))|(?P<p_tomorrow>(?:b?esok|bsk))|(?P<p_today>(?:hari ini))";   # PRECOMPUTE
-our $MAPS; # PRECOMPUTE
+our $MAPS = { months => { agt       => 8, agu       => 8, agustus   => 8, apr       => 4, april     => 4, des       => 12, desember  => 12, feb       => 2, februari  => 2, jan       => 1, januari   => 1, jul       => 7, juli      => 7, jun       => 6, juni      => 6, mar       => 3, maret     => 3, mei       => 5, nop       => 11, nopember  => 11, nov       => 11, november  => 11, okt       => 10, oktober   => 10, peb       => 2, pebruari  => 2, sep       => 9, sept      => 9, september => 9, }, }; # PRECOMPUTE
 
 # XXX relative day reference -> yesterday | today | tomorrow (-1, 0, 1)
 # XXX holidays -> christmas | new year | ...
@@ -64,7 +64,7 @@ DateTime::Format::Alami::ID - Parse human date/time expression (Indonesian)
 
 =head1 VERSION
 
-This document describes version 0.02 of DateTime::Format::Alami::ID (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
+This document describes version 0.03 of DateTime::Format::Alami::ID (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
 
 =head1 DESCRIPTION
 
