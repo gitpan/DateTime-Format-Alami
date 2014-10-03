@@ -1,7 +1,7 @@
 package DateTime::Format::Alami::ID;
 
 our $DATE = '2014-10-03'; # DATE
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 use 5.010001;
 use strict;
@@ -64,7 +64,7 @@ DateTime::Format::Alami::ID - Parse human date/time expression (Indonesian)
 
 =head1 VERSION
 
-This document describes version 0.04 of DateTime::Format::Alami::ID (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
+This document describes version 0.05 of DateTime::Format::Alami::ID (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
 
 =head1 DESCRIPTION
 

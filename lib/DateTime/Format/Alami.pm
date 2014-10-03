@@ -1,7 +1,7 @@
 package DateTime::Format::Alami;
 
 our $DATE = '2014-10-03'; # DATE
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 use 5.010001;
 use strict;
@@ -242,7 +242,7 @@ DateTime::Format::Alami - Parse human date/time expression (base class)
 
 =head1 VERSION
 
-This document describes version 0.04 of DateTime::Format::Alami (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
+This document describes version 0.05 of DateTime::Format::Alami (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
 
 =head1 SYNOPSIS
 
@@ -267,8 +267,8 @@ use Indonesian:
 B<EARLY RELEASE: PROOF OF CONCEPT ONLY AND VERY VERY INCOMPLETE.>
 
 This class parses human/natural date/time string and returns DateTime object.
-Currently it supports English and Indonesian. It is meant to be simple to
-add support for other human languages.
+Currently it supports English and Indonesian. The goal of this module is to make
+it easier to add support for other human languages.
 
 It works by matching date string with a bunch of regex patterns (assembled from
 C<p_*> methods, e.g. C<p_today>, C<p_dur_ago>, C<p_dur_later>, and so on). If a
@@ -308,9 +308,9 @@ It is an Indonesian word, meaning "natural".
 
 =head2 Similar modules on CPAN
 
-L<DateTime::Format::Natural>. Translating to a language other than English looks
-very complex. This is indicated by the lack of support for non-English
-languages.
+L<DateTime::Format::Natural>. You probably want to use this instead, unless you
+want something other than English. I did try to create an Indonesian translation
+for this module a few years ago, but gave up. Perhaps I make another attempt.
 
 =head2 Other modules on CPAN
 
