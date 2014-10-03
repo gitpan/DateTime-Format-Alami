@@ -1,12 +1,14 @@
 package DateTime::Format::Alami;
 
-our $DATE = '2014-10-02'; # DATE
-our $VERSION = '0.01'; # VERSION
+our $DATE = '2014-10-03'; # DATE
+our $VERSION = '0.02'; # VERSION
 
 use 5.010001;
 use strict;
 use warnings;
 use experimental 'smartmatch';
+
+my @shortmons = qw(jan feb mar apr may jun jul aug sep oct nov dec);
 
 # must be overriden
 sub o_num       {}
@@ -44,6 +46,21 @@ sub new {
         }
         ${"$class\::RE"} = join("|", sort {length($b)<=>length($a)} @pats);
     }
+    unless (${"$class\::MAPS"}) {
+        my $maps = {};
+        # month names -> num
+        {
+            my $i = 0;
+            for my $m (@shortmons) {
+                ++$i;
+                my $meth = "w_$m";
+                for (@{ $self->$meth }) {
+                    $maps->{months}{$_} = $i;
+                }
+            }
+        }
+        ${"$class\::MAPS"} = $maps;
+    }
     $self;
 }
 
@@ -64,6 +81,18 @@ sub parse_datetime {
     $self->{_dt};
 }
 
+sub o_dayint { "(?:[12][0-9]|3[01]|0?[1-9])" }
+
+sub o_monthint { "(?:0?[1-9]|1[012])" }
+
+sub o_monthname {
+    my $self = shift;
+    "(?:" . join(
+        "|",
+        (map {my $meth="w_$_"; @{ $self->$meth }} @shortmons)
+    ) . ")";
+}
+
 sub o_durwords  {
     my $self = shift;
     "(?:" . join(
@@ -76,6 +105,19 @@ sub o_durwords  {
 sub o_dur {
     my $self = shift;
     "(?:(" . $self->o_num . " ?" . $self->o_durwords . " ?)+)";
+}
+
+# durations less than a day
+sub o_timedurwords  {
+    my $self = shift;
+    "(?:" . join(
+        "|",
+        @{ $self->w_hour }, @{ $self->w_minute }, @{ $self->w_second },
+    ) . ")";
+}
+sub o_timedur {
+    my $self = shift;
+    "(?:(" . $self->o_num . " ?" . $self->o_timedurwords . " ?)+)";
 }
 
 sub _parse_dur {
@@ -144,10 +186,31 @@ sub a_today {
     $self->_setif_today;
 }
 
+sub a_timedur_today {
+    my $self = shift;
+    $self->_setif_today;
+}
+
 sub a_yesterday {
     my $self = shift;
     $self->_setif_today;
     $self->{_dt}->subtract(days => 1);
+}
+
+sub a_date_wo_year {
+    my ($self, $m) = @_;
+    $self->_setif_now;
+    if (defined $m->{o_monthint}) {
+        $self->{_dt}->set_month($m->{o_monthint});
+    }
+    if (defined $m->{o_monthname}) {
+        no strict 'refs';
+        my $maps = ${ ref($self) . '::MAPS' };
+        $self->{_dt}->set_month($maps->{months}{$m->{o_monthname}});
+    }
+    if (defined $m->{o_dayint}) {
+        $self->{_dt}->set_day($m->{o_dayint});
+    }
 }
 
 sub a_dur_ago {
@@ -179,7 +242,7 @@ DateTime::Format::Alami - Parse human date/time expression (base class)
 
 =head1 VERSION
 
-This document describes version 0.01 of DateTime::Format::Alami (from Perl distribution DateTime-Format-Alami), released on 2014-10-02.
+This document describes version 0.02 of DateTime::Format::Alami (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
 
 =head1 SYNOPSIS
 
@@ -234,6 +297,12 @@ Constructor. You actually must instantiate subclass instead.
 
 Parse date/time expression in C<$str> and return L<DateTime> object. Return
 undef if expression cannot be parsed.
+
+=head1 FAQ
+
+=head2 What does "alami" mean?
+
+It is an Indonesian word, meaning "natural".
 
 =head1 SEE ALSO
 

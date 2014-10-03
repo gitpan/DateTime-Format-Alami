@@ -2,8 +2,8 @@ NAME
     DateTime::Format::Alami - Parse human date/time expression (base class)
 
 VERSION
-    This document describes version 0.01 of DateTime::Format::Alami (from
-    Perl distribution DateTime-Format-Alami), released on 2014-10-02.
+    This document describes version 0.02 of DateTime::Format::Alami (from
+    Perl distribution DateTime-Format-Alami), released on 2014-10-03.
 
 SYNOPSIS
     Use English:
@@ -51,6 +51,10 @@ METHODS
   parse_datetime($str) => obj
     Parse date/time expression in $str and return DateTime object. Return
     undef if expression cannot be parsed.
+
+FAQ
+  What does "alami" mean?
+    It is an Indonesian word, meaning "natural".
 
 SEE ALSO
   Similar modules on CPAN
