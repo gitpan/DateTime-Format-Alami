@@ -2,7 +2,7 @@ NAME
     DateTime::Format::Alami - Parse human date/time expression (base class)
 
 VERSION
-    This document describes version 0.03 of DateTime::Format::Alami (from
+    This document describes version 0.04 of DateTime::Format::Alami (from
     Perl distribution DateTime-Format-Alami), released on 2014-10-03.
 
 SYNOPSIS

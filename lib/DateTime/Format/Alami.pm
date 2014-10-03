@@ -1,7 +1,7 @@
 package DateTime::Format::Alami;
 
 our $DATE = '2014-10-03'; # DATE
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 use 5.010001;
 use strict;
@@ -69,7 +69,7 @@ sub parse_datetime {
 
     undef $self->{_dt};
     no strict 'refs';
-    $str =~ ${ ref($self) . '::RE' } or return undef;
+    $str =~ /${ ref($self) . '::RE' }/o or return undef;
     my %m = %+;
     for (keys %m) {
         if (/^p_(.+)/) {
@@ -127,7 +127,7 @@ sub _parse_dur {
     unless ($self->{_cache_re_parse_dur}) {
         my $o_num = $self->o_num;
         my $o_dw  = $self->o_durwords;
-        $self->{_cache_re_parse_dur} = qr/($o_num) ?($o_dw)/;
+        $self->{_cache_re_parse_dur} = '($o_num) ?($o_dw)';
     }
     unless ($self->{_cache_w_second}) {
         $self->{_cache_w_second} = $self->w_second;
@@ -138,7 +138,7 @@ sub _parse_dur {
         $self->{_cache_w_month}  = $self->w_month;
         $self->{_cache_w_year}   = $self->w_year;
     }
-    while ($str =~ /$self->{_cache_re_parse_dur}/g) {
+    while ($str =~ /$self->{_cache_re_parse_dur}/go) {
         my ($n, $unit) = ($1, $2);
         $n = $self->_parse_num($n);
         if ($unit ~~ $self->{_cache_w_second}) {
@@ -242,7 +242,7 @@ DateTime::Format::Alami - Parse human date/time expression (base class)
 
 =head1 VERSION
 
-This document describes version 0.03 of DateTime::Format::Alami (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
+This document describes version 0.04 of DateTime::Format::Alami (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
 
 =head1 SYNOPSIS
 

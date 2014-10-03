@@ -1,15 +1,15 @@
 package DateTime::Format::Alami::EN;
 
 our $DATE = '2014-10-03'; # DATE
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 use 5.010001;
 use strict;
 use warnings;
 use parent qw(DateTime::Format::Alami);
 
-our $RE = "(?P<p_date_wo_year>(?P<o_dayint>(?:[12][0-9]|3[01]|0?[1-9])) ?(?P<o_monthname>(?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec))|(?P<o_monthname>(?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)) ?(?P<o_dayint>(?:[12][0-9]|3[01]|0?[1-9]))\\b|(?P<o_monthint>(?:0?[1-9]|1[012]))[ /-](?P<o_dayint>(?:[12][0-9]|3[01]|0?[1-9]))\\b)|(?P<p_dur_later>(?P<o_dur>(?:((?^x:(?:\n                  [+-]?\n                  (?:\n                      (?:\\d{1,3}(?:[,]\\d{3})+ | \\d+) (?:[.]\\d*)? | # english\n                      [.]\\d+\n                  )\n                  (?:[Ee][+-]?\\d+)?\n              )) ?(?:year|years|y|month|months|mon|week|weeks|wk|wks|day|days|d|hour|hours|h|minute|minutes|min|mins|second|seconds|sec|secs|s) ?)+)) (?:later))|(?P<p_dur_ago>(?P<o_dur>(?:((?^x:(?:\n                  [+-]?\n                  (?:\n                      (?:\\d{1,3}(?:[,]\\d{3})+ | \\d+) (?:[.]\\d*)? | # english\n                      [.]\\d+\n                  )\n                  (?:[Ee][+-]?\\d+)?\n              )) ?(?:year|years|y|month|months|mon|week|weeks|wk|wks|day|days|d|hour|hours|h|minute|minutes|min|mins|second|seconds|sec|secs|s) ?)+)) (?:ago))|(?P<p_now>(?:(?:(?:right|just) )?now|immediately))|(?P<p_yesterday>(?:yesterday|yest))|(?P<p_tomorrow>(?:tomorrow|tom))|(?P<p_today>(?:today|this day))";   # PRECOMPUTE
-our $MAPS = { months => { agt       => 8, agu       => 8, agustus   => 8, apr       => 4, april     => 4, des       => 12, desember  => 12, feb       => 2, februari  => 2, jan       => 1, januari   => 1, jul       => 7, juli      => 7, jun       => 6, juni      => 6, mar       => 3, maret     => 3, mei       => 5, nop       => 11, nopember  => 11, nov       => 11, november  => 11, okt       => 10, oktober   => 10, peb       => 2, pebruari  => 2, sep       => 9, sept      => 9, september => 9, }, }; # PRECOMPUTE
+our $RE = "(?P<p_date_wo_year>(?P<o_dayint>(?:[12][0-9]|3[01]|0?[1-9])) ?(?P<o_monthname>(?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec))|(?P<o_monthname>(?:january|jan|february|feb|march|mar|april|apr|may|june|jun|july|jul|august|aug|september|sept|sep|october|oct|november|nov|december|dec)) ?(?P<o_dayint>(?:[12][0-9]|3[01]|0?[1-9]))\\b|(?P<o_monthint>(?:0?[1-9]|1[012]))[ /-](?P<o_dayint>(?:[12][0-9]|3[01]|0?[1-9]))\\b)|(?P<p_dur_later>(?P<o_dur>(?:((?:[+-]?(?:(?:\\d{1,3}(?:[,]\\d{3})+|\\d+)(?:[.]\\d*)?|[.]\\d+)(?:[Ee][+-]?\\d+)?) ?(?:year|years|y|month|months|mon|week|weeks|wk|wks|day|days|d|hour|hours|h|minute|minutes|min|mins|second|seconds|sec|secs|s) ?)+)) (?:later))|(?P<p_dur_ago>(?P<o_dur>(?:((?:[+-]?(?:(?:\\d{1,3}(?:[,]\\d{3})+|\\d+)(?:[.]\\d*)?|[.]\\d+)(?:[Ee][+-]?\\d+)?) ?(?:year|years|y|month|months|mon|week|weeks|wk|wks|day|days|d|hour|hours|h|minute|minutes|min|mins|second|seconds|sec|secs|s) ?)+)) (?:ago))|(?P<p_now>(?:(?:(?:right|just) )?now|immediately))|(?P<p_yesterday>(?:yesterday|yest))|(?P<p_tomorrow>(?:tomorrow|tom))|(?P<p_today>(?:today|this day))";   # PRECOMPUTE
+our $MAPS = {months=>{agt=>8,agu=>8,agustus=>8,apr=>4,april=>4,des=>12,desember=>12,feb=>2,februari=>2,jan=>1,januari=>1,jul=>7,juli=>7,jun=>6,juni=>6,mar=>3,maret=>3,mei=>5,nop=>11,nopember=>11,nov=>11,november=>11,okt=>10,oktober=>10,peb=>2,pebruari=>2,sep=>9,sept=>9,september=>9}}; # PRECOMPUTE
 
 use Parse::Number::EN qw(parse_number_en);
 
@@ -60,7 +60,7 @@ DateTime::Format::Alami::EN - Parse human date/time expression (English)
 
 =head1 VERSION
 
-This document describes version 0.03 of DateTime::Format::Alami::EN (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
+This document describes version 0.04 of DateTime::Format::Alami::EN (from Perl distribution DateTime-Format-Alami), released on 2014-10-03.
 
 =head1 DESCRIPTION
 
